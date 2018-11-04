@@ -1,0 +1,5 @@
+2|A947UN|white|Ford|2|
+3|A666RT|black|Nissan|1|
+4|Z740OP|blue|Mazda|3|
+1|O740OP|green|Mazda|3|
+

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,13 @@ namespace WindowsFormsApp3
         /// <returns></returns>
         public DataTable getAuto()
         {
-            return MainSQL("SELECT * FROM auto");
+            return MainSQL("Select auto.id, auto.num, auto.color, auto.mark, auto_personnel.first_name " +
+                "FROM auto" +
+                " RIGHT OUTER JOIN  auto_personnel " +
+                "ON auto.personnel_id = auto_personnel.id");
         }
+      
+
         /// <summary>
         /// получение списка пользователей
         /// </summary>
@@ -40,7 +46,10 @@ namespace WindowsFormsApp3
         /// <returns></returns>
         public DataTable getJournals()
         {
-            return MainSQL("SELECT * FROM journal");
+            return MainSQL("SELECT journal.id, journal.time_out, journal.time_in, routes.name, auto.num " +
+                "FROM journal " +
+                "RIGHT OUTER JOIN routes ON journal.route_id = routes.id " +
+                "RIGHT OUTER JOIN auto ON journal.auto_id = auto.id");
         }
         /// <summary>
         /// получение списка водителей
@@ -268,7 +277,37 @@ namespace WindowsFormsApp3
         {
             string sql = String.Format("DELETE FROM {0} WHERE id = {1}", table, id);
             MainSQL(sql);
-        }     
+        }    
+        /// <summary>
+        /// получение настроек
+        /// </summary>
+        /// <returns></returns>
+        public string configinf()
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader("config.info", System.Text.Encoding.Default))
+                {
+                    return sr.ReadLine();
+                }
+            }
+            catch { return ""; }
+        }
+        /// <summary>
+        /// завпись настроек
+        /// </summary>
+        /// <param name="t1">сервер</param>
+        /// <param name="t2">порт</param>
+        /// <param name="t3">пользователь</param>
+        /// <param name="t4">пароль</param>
+        /// <param name="t5">БД</param>
+        public void writeconfig(string t1, string t2, string t3, string t4, string t5)
+        {
+            using (StreamWriter sw = new StreamWriter("config.info", false, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(String.Format("Server={0}; Port={1}; User Id={2}; Password={3}; Database={4};", t1,t2,t3,t4,t5));
+            }
+        }
         /// <summary>
         /// основная функция работы с БД со вшитыми параметрами возвращает данные
         /// </summary>
@@ -279,7 +318,7 @@ namespace WindowsFormsApp3
             DataTable DT = new DataTable();
             try
             {
-                NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;Port=5432;User Id=postgres; Password= ;Database=auto_b;");
+                NpgsqlConnection conn = new NpgsqlConnection(configinf());
                 NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
                 conn.Open(); //Открываем соединение.
                 NpgsqlDataReader reader = comm.ExecuteReader();

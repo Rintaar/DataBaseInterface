@@ -28,15 +28,15 @@ namespace WindowsFormsApp3
                 button4.Visible = false;
             }
             rb_journal.Checked = true;
-            viewtable();
+            Viewtable();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            viewtable();
+            Viewtable();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Button4_Click(object sender, EventArgs e)
         {
             if (rb_auto.Checked)
                 psql.delAuto(dgv.SelectedCells[0].Value.ToString());
@@ -48,9 +48,9 @@ namespace WindowsFormsApp3
                 psql.delRoutes(dgv.SelectedCells[0].Value.ToString());
             if (rb_users.Checked && dgv.SelectedCells[0].Value.ToString()!=id)
                 psql.delUser(dgv.SelectedCells[0].Value.ToString());
-            viewtable();
+            Viewtable();
         }
-        private void viewtable()
+        private void Viewtable()
         {
             try
             {
@@ -68,7 +68,7 @@ namespace WindowsFormsApp3
                     dgv.Columns[1].HeaderText = "Номер";
                     dgv.Columns[2].HeaderText = "Цвет";
                     dgv.Columns[3].HeaderText = "Марка";
-                    dgv.Columns[4].HeaderText = "ID водителя";
+                    dgv.Columns[4].HeaderText = "Водитель";
                 }
                 if (rb_aper.Checked)
                 {
@@ -84,8 +84,8 @@ namespace WindowsFormsApp3
                         dgv.DataSource = psql.getJournals();
                         dgv.Columns[1].HeaderText = "Время выезда";
                         dgv.Columns[2].HeaderText = "Время возвращения";
-                        dgv.Columns[3].HeaderText = "ID автомобиля";
-                        dgv.Columns[4].HeaderText = "ID маршрута";
+                        dgv.Columns[3].HeaderText = "Маршрут";
+                        dgv.Columns[4].HeaderText = "Номер автомобиля";
                     }
                     catch { }
                 }
@@ -100,24 +100,24 @@ namespace WindowsFormsApp3
             catch { }
         }
 
-        private void rb_auto_CheckedChanged(object sender, EventArgs e)
+        private void Rb_auto_CheckedChanged(object sender, EventArgs e)
         {
-            viewtable();
+            Viewtable();
         }
 
-        private void rb_aper_CheckedChanged(object sender, EventArgs e)
+        private void Rb_aper_CheckedChanged(object sender, EventArgs e)
         {
-            viewtable();
+            Viewtable();
         }
 
         private void rb_journal_CheckedChanged(object sender, EventArgs e)
         {
-            viewtable();
+            Viewtable();
         }
 
         private void rb_routes_CheckedChanged(object sender, EventArgs e)
         {
-            viewtable();
+            Viewtable();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -155,7 +155,7 @@ namespace WindowsFormsApp3
         }
         private void updateDB(object sender, EventArgs e)
         {
-            viewtable();
+            Viewtable();
             
         }
         private void button3_Click(object sender, EventArgs e)
@@ -201,7 +201,7 @@ namespace WindowsFormsApp3
 
         private void rb_users_CheckedChanged(object sender, EventArgs e)
         {
-            viewtable();
+            Viewtable();
         }
     }
 }

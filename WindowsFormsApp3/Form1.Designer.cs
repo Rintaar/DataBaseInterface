@@ -68,7 +68,7 @@
             this.rb_auto.TabStop = true;
             this.rb_auto.Text = "Автомобили";
             this.rb_auto.UseVisualStyleBackColor = true;
-            this.rb_auto.CheckedChanged += new System.EventHandler(this.rb_auto_CheckedChanged);
+            this.rb_auto.CheckedChanged += new System.EventHandler(this.Rb_auto_CheckedChanged);
             // 
             // rb_aper
             // 
@@ -80,7 +80,7 @@
             this.rb_aper.TabStop = true;
             this.rb_aper.Text = "Водители";
             this.rb_aper.UseVisualStyleBackColor = true;
-            this.rb_aper.CheckedChanged += new System.EventHandler(this.rb_aper_CheckedChanged);
+            this.rb_aper.CheckedChanged += new System.EventHandler(this.Rb_aper_CheckedChanged);
             // 
             // rb_journal
             // 
@@ -137,7 +137,7 @@
             this.button4.TabIndex = 8;
             this.button4.Text = "Удалить";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // button1
             // 

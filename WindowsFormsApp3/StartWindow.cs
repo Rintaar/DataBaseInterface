@@ -35,5 +35,13 @@ namespace WindowsFormsApp3
         {
             this.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form f = new Configs();
+            f.FormClosed += updateDB;
+            f.Show();
+            this.Hide();
+        }
     }
 }
